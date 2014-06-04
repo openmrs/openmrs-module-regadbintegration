@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqldiff PUBLIC "-//OpenMRS//DTD OpenMRS SQL Diff Config 1.0//EN" "http://resources.openmrs.org/doctype/sqldiff-1.0.dtd">
+
+<sqldiff version="1.0">
+	
+	<diff>
+		<version>1.0.1</version>
+		<author>Sai Manohar</author>
+		<date>Nov 9th 2009</date>
+		<description>
+			A table for storing staging data
+		</description>
+		<sql>
+		CREATE TABLE `rega_temp_staging_data` (
+				`patient_data_id` int(11) NOT NULL auto_increment,
+				`patient_id` int(50) NOT NULL,
+				`obs_id` int(50) default NULL,
+				`full_export` smallint(6) NOT NULL,
+				`date_created` DATETIME default NULL,
+				PRIMARY KEY  (`patient_data_id`),UNIQUE(`patient_id`,`obs_id`,`full_export`),CONSTRAINT `staging_patient_id` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`patient_id`) ON UPDATE CASCADE,CONSTRAINT `staging_obs_id` FOREIGN KEY (`obs_id`) REFERENCES `obs` (`obs_id`) ON UPDATE CASCADE
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8
+		</sql>
+	</diff>
+	<diff>
+		<version>1.0.2</version>
+		<author>Sai Manohar</author>
+		<date>Nov 9th 2009</date>
+		<description>
+			A table for Related Concepts
+		</description>
+		<sql>
+			CREATE TABLE `rega_related_concepts` (`concept_related_id` int(11) NOT NULL AUTO_INCREMENT ,`concept_id` int(11) NOT NULL DEFAULT '0',PRIMARY KEY (`concept_related_id`),UNIQUE (`concept_id`),CONSTRAINT `concept_id_for_related_concept` FOREIGN KEY (`concept_id`) REFERENCES `concept` (`concept_id`) ON UPDATE CASCADE)  ENGINE=InnoDB DEFAULT CHARSET=utf8
+		</sql>
+	</diff>
+	
+
+</sqldiff>

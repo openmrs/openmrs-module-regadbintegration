@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+ <rega_temp_staging_data patient_data_id="1" patient_id="1"  full_export="true" date_created="2006-02-09 00:00:00.0"/>
+ <rega_temp_staging_data patient_data_id="2" patient_id="2"  obs_id="23" full_export="false" date_created="2006-02-09 00:00:00.0"/>
+</dataset>

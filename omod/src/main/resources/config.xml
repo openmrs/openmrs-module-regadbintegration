@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//OpenMRS//DTD OpenMRS Config 1.0//EN" "http://resources.openmrs.org/doctype/config-1.0.dtd">
+
+<module configVersion="1.0">
+	
+	<!-- RegaDBIntegration Module Properties -->
+	<id>@MODULE_ID@</id>
+	<name>@MODULE_NAME@</name>
+	<version>@MODULE_VERSION@</version>
+	<package>@MODULE_PACKAGE@</package>
+	<author>Sai Manohar</author>
+	<description>
+			
+	</description>
+	<activator>@MODULE_PACKAGE@.RegaDBIntegrationModuleActivator</activator>
+	<!-- /RegaDBIntegration Module Properties -->
+	<extension>
+	<point>org.openmrs.patientDashboardTab</point>
+	<class>@MODULE_PACKAGE@.extension.html.PatientDashboardTab</class>
+	</extension>
+	
+	<extension>
+	<point>org.openmrs.admin.list</point>
+	<class>@MODULE_PACKAGE@.extension.html.AdminList</class>
+	</extension>
+	
+	<messages>
+        <lang>en</lang>
+        <file>messages.properties</file>
+    </messages>
+	<servlet>
+		<servlet-name>FileServlet</servlet-name>
+		<servlet-class>@MODULE_PACKAGE@.web.servlet.FileServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FileServlet</servlet-name>
+		<url-pattern>/FileServlet</url-pattern>
+	</servlet-mapping>
+	<!-- /RegaDBIntegration Module Properties -->
+
+	<globalProperty>
+		<property>@MODULE_ID@.remoteinstanceaddress</property>
+		<defaultValue></defaultValue>
+		<description>
+			ipadress or domain name of the remote server.
+		</description>
+	</globalProperty>
+		
+	<globalProperty>
+		<property>@MODULE_ID@.regadbusername</property>
+		<defaultValue></defaultValue>
+		<description>
+			username of the remote regadb instance
+		</description>
+	</globalProperty>
+	
+	<globalProperty>
+		<property>@MODULE_ID@.regadbpassword</property>
+		<defaultValue></defaultValue>
+		<description>
+			password of the remote regadb instance
+		</description>
+	</globalProperty>
+	
+	 <advice>
+		<point>org.openmrs.api.ObsService</point>
+		<class>@MODULE_PACKAGE@.advice.RegaObsAdvice</class>
+	</advice> 
+	 
+	 <mappingFiles>
+		${omodHbmConfig}
+	</mappingFiles> 
+</module>

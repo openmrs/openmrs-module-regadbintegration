@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<!-- Beans to add to the current Application context definition -->
+ 
+<beans>
+	 
+    <bean id="regadbintegrationUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+    	 <property name="order"><value>97</value></property> 
+    	<property name="mappings">
+            <props>
+           	 <prop key="**/RegaExport.portlet">RegaExport</prop>  
+           	 <prop key="/module/regadbintegration/addRelatedConcepts.form">addRelatedConcepts</prop>
+           	 <prop key="/module/regadbintegration/patientBulkExport.form">patientBulkExport</prop> 
+           	</props>
+		</property>
+	</bean>
+
+
+	
+	<!-- Controllers -->
+<bean id="RegaExport" class="org.openmrs.module.regadbintegration.web.controller.RegaExportPortletController">
+		<property name="commandName"><value>Exported</value></property>
+</bean>
+<bean id="addRelatedConcepts" class="org.openmrs.module.regadbintegration.web.controller.AddRelatedConceptsFormController">
+		<property name="commandName"><value>concept</value></property>
+		<property name="formView"><value>/module/regadbintegration/addRelatedConcepts</value></property>
+		<property name="successView"><value>addRelatedConcepts.form</value></property>
+</bean>
+<bean id="patientBulkExport" class="org.openmrs.module.regadbintegration.web.controller.BulkExportFormController">
+		<property name="formView"><value>/module/regadbintegration/patientBulkExport</value></property>
+		<property name="successView"><value>patientBulkExport.form</value></property>
+</bean>
+
+	
+	
+	
+	<!-- Services -->
+	<bean parent="serviceContext">
+		<property name="moduleService">
+			<list>
+				<value>org.openmrs.module.regadbintegration.RegaService</value> <!-- service interface name -->
+				<bean class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+					<property name="transactionManager"><ref bean="transactionManager"/></property>
+					<property name="target">
+						<bean class="org.openmrs.module.regadbintegration.impl.RegaServiceImpl">
+							<property name="dao">
+								<bean class="org.openmrs.module.regadbintegration.db.hibernate.HibernateRegaDAO">
+									<property name="sessionFactory"><ref bean="sessionFactory"/></property>	
+								</bean>
+							</property>
+						</bean>
+					</property>
+					<property name="preInterceptors">
+						<list>
+							<ref bean="authorizationInterceptor"/>
+						</list>
+					</property>
+					<property name="transactionAttributeSource">
+						<bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource"/>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+</beans>

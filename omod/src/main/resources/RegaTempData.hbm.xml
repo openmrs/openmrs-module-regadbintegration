@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="@MODULE_PACKAGE@">
+
+	<class name="RegaData" table="rega_temp_staging_data" >
+
+		<id name="patientDataId" type="int" column="patient_data_id">
+			<generator class="native" />
+		</id>
+
+		<property name="patientId" type="java.lang.Integer" column="patient_id"
+			length="50" not-null="true" />
+			
+			<property name="ObsId" type="java.lang.Integer" column="obs_id"
+			length="50"  />
+		<property name="fullExport" type="boolean" column="full_export"
+			not-null="true" length="1" />
+			<property name="dateCreated" type="java.util.Date" column="date_created"
+			 length="50" />
+
+	</class>
+	
+</hibernate-mapping>
