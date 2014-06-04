@@ -12,9 +12,9 @@
 	<url>http://openmrs.org</url>
 
 	<scm>
-		<connection>scm:svn:http://svn.openmrs.org/openmrs-modules/regadbintegration/trunk/</connection>
-		<developerConnection>scm:svn:http://svn.openmrs.org/openmrs-modules/regadbintegration/trunk/</developerConnection>
-		<url>http://svn.openmrs.org/openmrs-modules/regadbintegration/trunk/</url>
+		<url>https://github.com/openmrs/openmrs-module-regadbintegration.git</url>
+		<connection>scm:git:git:https://github.com/openmrs/openmrs-module-regadbintegration.git</connection>
+		<developerConnection>scm:git:git@github.com:https://github.com/openmrs/openmrs-module-regadbintegration.git</developerConnection>
 	</scm>
 
 	<modules>
