@@ -10,9 +10,13 @@ To try this module you need to setup RegaDB.
    
    ->move into vagrant folder and run the command 'vagrant up' 
    
+    During the setup it will ask to run 'vagrant provision' command. 
+   
       Prerequisite before you run the command is to install virtualbox on your system
    
       You can download it from here- https://www.virtualbox.org/wiki/Downloads
+   
+   It will take some time to finish the setup.
    
    ->After it is finished,You have RegaDB setup on your system.
    
@@ -58,4 +62,8 @@ It gives an error after loading the omod file,Go to 'Advanced Settings' in the a
 
  regadb remoteinstanceAddress- localhost
  
+ Try starting the module again. 
+ 
+ 
+ If you need not require RegaDB any more you simply run 'vagrant destroy' command in your cmd in your vagrant folder.
  
