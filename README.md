@@ -1,6 +1,5 @@
 openmrs-module-regadbintegration
 ================================
-
 To try this module you need to setup RegaDB.
 
 ---Steps to setup RegaDB---
