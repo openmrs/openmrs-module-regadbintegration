@@ -40,7 +40,7 @@ To try this module you need to setup RegaDB.
       
      mvn install:install-file -Dfile=SPECIFY_PATH_TO_FILE_LOCATION\wts-client.jar -DgroupId=net.sf.wts.client -DartifactId
      
-     = -Dversion=0.9 -Dpackaging=jar
+     =wts-client -Dversion=0.9 -Dpackaging=jar
 
    After installing the two jars you can compile the module in Eclipse IDE.
 
