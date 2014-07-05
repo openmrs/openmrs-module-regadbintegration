@@ -2,7 +2,7 @@ openmrs-module-regadbintegration
 ================================
 To try this module you need to setup RegaDB.
 
----Steps to setup RegaDB---
+## Steps to setup RegaDB
   
    After checking out the code
    
@@ -20,7 +20,7 @@ To try this module you need to setup RegaDB.
    
    ->After it is finished,You have RegaDB setup on your system.
    
----Before Compiling the Module---
+## Before Compiling the Module
   
   Before compiling the code, You need to install two jar files manually into you repo
    
@@ -48,7 +48,7 @@ To try this module you need to setup RegaDB.
 
    After installing the two jars you can compile the module in Eclipse IDE.
 
----After Compiling the Module---
+## After Compiling the Module
 
 Load the omod file.
 
