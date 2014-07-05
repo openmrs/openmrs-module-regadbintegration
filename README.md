@@ -37,13 +37,11 @@ To try this module you need to setup RegaDB.
       Run the following command to install xls.jar
       
       mvn install:install-file -Dfile=SPECIFY_PATH_TO_FILE_LOCATION\xls.jar -DgroupId=com.rega.code -DartifactId=xls 
-      
       -Dversion=1.0 -Dpackaging=jar
         
       Run the following command to install wts-client.jar  
       
      mvn install:install-file -Dfile=SPECIFY_PATH_TO_FILE_LOCATION\wts-client.jar -DgroupId=net.sf.wts.client 
-     
      -DartifactId=wts-client -Dversion=0.9 -Dpackaging=jar
 
    After installing the two jars you can compile the module in Eclipse IDE.
