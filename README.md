@@ -32,7 +32,7 @@ To try this module you need to setup RegaDB.
    
    ->Steps to install the jars
      
-        >Open terminal or cmd
+        ->Open terminal or cmd
      
       Run the following command to install xls.jar
       
