@@ -46,6 +46,91 @@ To try this module you need to setup RegaDB.
 
    After installing the two jars you can compile the module in Eclipse IDE.
 
+## Installing WTS (Web Terrain Service)
+
+WTS is an external application through which OpenMRS interacts with RegaDB.  
+
+##### Create directory structure for wts
+
+      On terminal, Execute the following
+   
+        cd /etc/
+   
+       sudo mkdir wt
+   
+       cd wt
+   
+       sudo mkdir wts
+   
+   Place the configuration file **wts.xml** in this folder
+   
+       sudo cp "current location of wts.xml" /etc/wt/wts/wts.xml
+ 
+ and change the permissions of this folder
+ 
+       sudo chown -R tomcat6:tomcat6 /etc/wt/wts/
+
+This file contains the expire time and the location of the directory in which the server stores its data. You can     change these if you want an alternative location.
+
+ If this is the default location /etc/serverdir/wts/ then execute the following
+ 
+        cd /etc/
+
+        sudo mkdir serverdir
+
+        cd serverdir
+
+        mkdir wts
+
+        cd wts
+
+        sudo mkdir services
+
+        sudo mkdir sessions
+
+        sudo mkdir users
+ 
+  copy the users.pwd to the users directory, whose contents are "public:TJGE83z/AbzcMtxIbsNpYQ=="
+    
+      sudo cp "current location of users.pwd" /etc/serverdir/wts/users/users.pwd
+   
+  copy the given services - generate-report, import-xls and get-algorithms to the services folder
+   
+   NOTE: You need to copy a JVM (java) folder to the folder /opt/ and give tomcat6 permissions to execute the java   command
+   
+  Do as follows:
+  
+        sudo cp -R "/usr/lib/jvm/java-6-sun (or) /usr/lib/jvm/java-6-sun-1.6.0.20 /opt/" depending on which you intend using
+  
+        sudo chown -R tomcat6:tomcat6 /opt/java-folder-you-copied
+  
+        sudo chmod -R 777 /opt/java-folder-you-copied
+  
+  Then for each of the startService executable file in the folders, (/etc/serverdir/wts/services/ generate-report,  get-algorithms and import-xls)
+  
+    edit the line that starts with #$JAVA_HOME/bin/java -cp regadb-analyses-0.9.jar:..., to
+  
+    /opt/java-6-sun-1.6.0.20/bin/java -cp regadb-analyses-0.9.jar:...
+  
+    now copy the rest of the folders
+  
+       sudo cp -R "current location of generate-report folder" /etc/serverdir/wts/services/
+  
+        sudo cp -R "current location of import-xls folder" /etc/serverdir/wts/services/
+  
+       sudo cp -R "current location of get-algorithms folder" /etc/serverdir/wts/services/
+  
+  and modify the permissions of this folder as well
+  
+       sudo chown -R tomcat6:tomcat6 /etc/serverdir/wts/
+  
+ Deploy wts into tomcat
+  
+    In order to deploy wts in tomcat copy the wts.war to tomcat's webapps
+  
+#####With this we have successfully installed wts 
+   
+   
 ## After Compiling the Module
 
 Load the omod file.
