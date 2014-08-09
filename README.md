@@ -96,7 +96,7 @@ This file contains the expire time and the location of the directory in which th
    
   copy the given services - generate-report, import-xls and get-algorithms to the services folder
    
-   NOTE: You need to copy a JVM (java) folder to the folder /opt/ and give tomcat6 permissions to execute the java   command
+   NOTE: You need to copy a JVM (java) folder to the folder **/opt/** and give tomcat6 permissions to execute the java   command
    
   Do as follows:
   
