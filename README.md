@@ -148,6 +148,7 @@ It gives an error after loading the omod file,Go to 'Advanced Settings' in the a
  Try starting the module again. 
  
  
+ Here's the user manual for the module http://aniketha.github.io/openmrs-module-regadbintegration-1/
  
  
  **If you need not require RegaDB any more you simply run 'vagrant destroy' command in your cmd from your vagrant folder.**
