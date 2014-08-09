@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wts-settings>
+  <wts-dir>/etc/serverdir/wts/</wts-dir>
+  <challenge-settings>
+    <expire-time>1000</expire-time>
+  </challenge-settings>
+</wts-settings>
+

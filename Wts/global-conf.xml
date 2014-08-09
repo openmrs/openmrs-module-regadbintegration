@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<regadb-settings>
+  <institute>
+	<!--  directory for logging files, read/write permissions necessary
+	      this field is required 
+	-->  
+    <log-dir>/etc/rega_institute/regadb/log</log-dir>
+    
+    <!--  directory for temporary query results, appropriate read/write permissions necessary
+	  this field is required 
+    -->
+    <query-result-dir>/etc/rega_institute/regadb/query</query-result-dir>
+    
+	<!--  directory for import definition storage, appropriate read/write permissions necessary
+	  this field is required 
+    -->
+    <import-tool-dir>/etc/rega_institute/regadb/import</import-tool-dir>
+
+    <!--  image file containing an alternative logo
+	      this field is optional
+	-->  
+  	<logo>pics/htlv/logo.gif</logo>
+    
+	<!--  boolean value describing whether the viral isolate sample date should be mandatory 
+	--> 
+    <sample-date-mandatory>true</sample-date-mandatory>
+    
+    <!-- Email configuration 
+    	Optional -->
+    <e-mail>
+    	<host>relay.test.org</host>
+    	<from address="admin@test.org" />
+    	<to>
+			<recipient address="pieter.libin@mybiodata.eu" />
+			<recipient address="stijn.imbrechts@kuleuven.ac.be" />
+		</to>
+    </e-mail>
+    
+    <!-- General properties -->
+    <!--  Automatically split trugene sequences with > 100 n symbols (Optional)-->
+    <trugene-fix>true</trugene-fix>
+    
+    <!--  configuration for Belgian WIV queries
+	  this element is optional 
+    -->
+    <wiv>
+      <!-- the name of the WIV centre -->
+      <centre-name>KUL</centre-name>
+      
+      <!--
+      	specify an attribute value to distinguish ARC from ARL patients,
+      	only patients with this attribute value will show up in the ARC queries,
+      	when omitted, all patients will be used for ARC
+      -->
+      <arc-patient-filter>
+        <attribute name="FOLLOW-UP" group="WIV" value="1: ARC of the same institution as ARL" />
+      </arc-patient-filter>
+      
+      <!--
+      	the viral load test type which values will be used for the viral load wiv queries
+      	copies/ml will be automatically converted to log10 in the query results
+      -->
+      <viral-load-testtype>
+        <testtype description="Viral Load (copies/ml)" organism="HIV-1" />
+      </viral-load-testtype>
+    </wiv>
+    
+    <!--
+    	the maximum amount of days a test result`s date can deviate from the viral isolate`s
+    	sample date, for it to be included in a patient`s viral isolate resistance report
+			
+        this field is optional 
+    --> 
+    <report-date-tolerance>2</report-date-tolerance>
+    
+    <!--
+    	the date format, detailed information on the format:
+    	http://java.sun.com/javase/6/docs/api/java/text/SimpleDateFormat.html
+
+	this field is optional
+    -->
+    <date-format>dd/MM/yyyy</date-format>
+    
+    <!-- 
+    	The organism filter can be used to exclude certain organisms from RegaDB.
+    	
+    	This field is optional.
+     -->
+    <organism-filter>HIV*</organism-filter>
+    
+    <forms>
+      <!--
+      	patient select form configuration:
+      	showSampleIds:		show the sample id column
+      	attribte-filter:	the default attribute to be selected in the attribute-column, optional
+      	attributes:			the list of attributes to be present in the selection table
+
+	this element is optional
+      -->
+      <form name="datatable.patient.SelectPatientForm" showSampleIds="true">
+        <attribute-filter>
+          <attribute name="Gender" group="Personal" />
+        </attribute-filter>
+        <attributes>
+          <attribute name="First name" group="Personal" />
+          <attribute name="Last name" group="Personal" />
+        </attributes>
+      </form>
+      
+	  <!--  viral isolate form configuration
+
+            this element is optional
+      -->
+      <form name="form.viralIsolate">
+		<!-- list of tests in the form -->
+        <tests/>
+        
+        <!--  This element is optional -->
+        <resistance/>
+        	
+      </form>
+      
+      <!--  custom contact form configuration 
+
+            this element is optional
+      -->
+      <form name="form.multipleTestResults.contact">
+      	<!-- list of tests in the form -->
+        <tests>
+          <test description="CD4 Count (generic)" />
+          <test description="CD8 Count (generic)" />
+          <test description="Viral Load (copies/ml) (generic)" organism="HIV-1" />
+        </tests>
+        <!--
+        	list of events in the form
+        	useContactDate: use the contact date as start date of the events
+        -->
+        <events useContactDate="true">
+        	<event name="Pregnancy"/>
+        </events>
+      </form>
+    </forms>
+  </institute>
+  
+  <!--  Hibernate database connection configuration
+	
+	this element is required
+  -->
+  <hibernate>
+    <!-- database username -->
+    <property name="hibernate.connection.username">regadb_user</property>
+    <!-- database driver class-->
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    <!-- database password -->
+    <property name="hibernate.connection.password">regadb_password</property>
+    <!-- database dialect -->
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+    <!-- database url -->
+    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/regadb</property>
+  </hibernate>
+ 
+  <!--  access policies
+        this element is required, at least one role should be defined
+  --> 
+  <access-policies>
+    <!-- each user is connected to one role -->
+    <roles>
+      <role>
+        <name>admin</name>
+        <admin>true</admin>
+        <blocked-attributes/>
+      </role>
+      <role>
+        <name>user</name>
+        <admin>false</admin>
+        <!-- disabled viewing and editing of certain attributes -->
+        <blocked-attributes>
+          <attribute name="First name" group="Personal" />
+          <attribute name="Last name" group="Personal" />
+        </blocked-attributes>
+      </role>
+    </roles>
+  </access-policies>
+  	
+
+  <!--  a list of proxy servers, with optional authentication 
+        this element is only required if your installation is behind a proxy server
+        the optional 'type' attribute can be either 'http' (default) or 'socks'
+  -->
+  <proxies/>
+   
+</regadb-settings>

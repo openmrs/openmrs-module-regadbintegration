@@ -1,0 +1,37 @@
+#!/bin/bash
+
+monitor_file="$1/.monitor"
+
+running_file="$1/.running"
+
+echo "Setting files" >> $monitor_file
+
+conf_file="$1/inputs/configfile"
+
+algo_file="$1/inputs/algorithmfile"
+
+log_file="$1/outputs/logfile"
+
+report_file="$1/outputs/reportfile"
+
+cd /var/lib/tomcat6/webapps/regadb/WEB-INF/classes
+
+echo "Generating..." >> $monitor_file
+
+username=`awk -F= '/username/ {print $2 }' $conf_file`
+password=`awk -F= '/password/ {print $2 }' $conf_file`
+patientid=`awk -F= '/patientid/ {print $2 }' $conf_file`
+
+export DISPLAY=:0.0
+xhost + 
+
+echo java -cp .:../lib/regadb-analyses-0.9.jar:../lib/regadb-analyses-ioAssist-0.9.jar:../lib/regadb-install-0.9.jar:../lib/regadb-install-regadb-init-0.9.jar:../lib/regadb-io-0.9.jar:../lib/regadb-io-db-0.9.jar:../lib/regadb-persist-0.9.jar:../lib/regadb-swing-0.9.jar:../lib/regadb-util-0.9.jar:../lib/regadb-workflow-0.9.jar net.sf.regadb.report.GenerateReportWithChart $username $password $patientid  $algo_file $log_file $report_file >> $monitor_file
+
+$JAVA_HOME/bin/java -cp .:../lib/regadb-analyses-0.9.jar:../lib/regadb-analyses-ioAssist-0.9.jar:../lib/regadb-install-0.9.jar:../lib/regadb-install-regadb-init-0.9.jar:../lib/regadb-io-0.9.jar:../lib/regadb-io-db-0.9.jar:../lib/regadb-persist-0.9.jar:../lib/regadb-swing-0.9.jar:../lib/regadb-util-0.9.jar:../lib/regadb-workflow-0.9.jar net.sf.regadb.report.GenerateReportWithChart $username $password $patientid $algo_file $log_file $report_file 2>>$monitor_file
+
+
+echo "Generated" >> $monitor_file
+
+rm "$running_file"
+
+echo "ENDED_SUCCES" > "$1/.ended"

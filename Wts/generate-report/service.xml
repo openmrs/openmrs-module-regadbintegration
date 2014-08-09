@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<service>
+
+	<description>Generate Report</description>
+
+	<version>
+
+	1.0
+
+	</version>
+
+<inputs>
+	<input>
+
+                <name>
+
+                configfile
+
+                </name>
+
+                <description>
+
+                A file containing all the parameters for generating the report.
+
+                </description>
+
+        </input>
+	<input>
+
+                <name>
+
+                algorithmfile
+
+                </name>
+
+                <description>
+
+                A file containing the list of algorithms.
+
+                </description>
+
+        </input>
+</inputs>
+
+<outputs>
+
+	<output>
+
+		<name>
+
+	        logfile	
+
+		</name>
+
+		<description>A file containing error sequence if any</description>
+
+	</output>
+	<output>
+
+		<name>
+
+	        reportfile	
+
+		</name>
+
+		<description>The report file generated</description>
+
+	</output>
+
+</outputs>
+</service>
