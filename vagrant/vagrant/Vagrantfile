@@ -1,0 +1,32 @@
+Vagrant::Config.run do |config|
+	# Box setup.
+	config.vm.box = "precise32"
+	config.vm.box_url = "http://files.vagrantup.com/precise32.box"
+	config.vm.customize ["modifyvm", :id, "--memory", 768]
+
+	# Network setup
+	config.vm.network :bridged
+	config.vm.forward_port 8080, 8084
+
+	# Shared folder setup
+	config.vm.share_folder "regadb", "/regadb", "./"
+
+	# Ensure packages are up to date
+	config.vm.provision :shell do |shell|
+		shell.inline = "sudo apt-get update"
+		end
+
+	# Install required puppet modules
+	config.vm.provision :shell do |shell|
+  		shell.inline = "mkdir -p /etc/puppet/modules;
+           	puppet module install puppetlabs/postgresql;
+           	puppet module install duritong/sysctl"
+ 		end
+
+	# Provisioning setup
+	config.vm.provision :puppet do |puppet|
+    	puppet.manifests_path = "./manifests"
+    	puppet.options = ["--verbose"]
+    	puppet.manifest_file  = "regadb.pp"	
+   	end
+end

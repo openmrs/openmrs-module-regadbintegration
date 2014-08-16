@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<service>
+
+	<description>Import from XLS</description>
+
+	<version>
+
+	1.0
+
+	</version>
+
+<inputs>
+
+	<input>
+
+		<name>
+
+		excelfile	
+
+		</name>
+
+		<description>
+
+		An Excel file containing patient details.
+
+		</description>
+
+	</input>
+	<input>
+
+                <name>
+
+                configfile
+
+                </name>
+
+                <description>
+
+                A file containing methodname,username and password.
+
+                </description>
+
+        </input>
+
+</inputs>
+
+<outputs>
+
+	<output>
+
+		<name>
+
+	        logfile	
+
+		</name>
+
+		<description>A file containing error sequence if any</description>
+
+	</output>
+
+</outputs>
+
+</service>

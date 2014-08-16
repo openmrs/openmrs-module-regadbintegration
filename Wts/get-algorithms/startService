@@ -1,0 +1,32 @@
+#!/bin/bash
+
+monitor_file="$1/.monitor"
+
+running_file="$1/.running"
+
+echo "Setting files" >> $monitor_file
+
+conf_file="$1/inputs/configfile"
+
+log_file="$1/outputs/logfile"
+
+list_file="$1/outputs/listfile"
+
+cd /var/lib/tomcat6/webapps/regadb/WEB-INF/lib
+
+echo "Generating List" >> $monitor_file
+
+username=`awk -F= '/username/ {print $2 }' $conf_file`
+password=`awk -F= '/password/ {print $2 }' $conf_file`
+patientid=`awk -F= '/patientid/ {print $2 }' $conf_file`
+
+echo java -cp regadb-analyses-0.9.jar:regadb-analyses-ioAssist-0.9.jar:regadb-install-0.9.jar:regadb-install-regadb-init-0.9.jar:regadb-io-0.9.jar:regadb-io-db-0.9.jar:regadb-persist-0.9.jar:regadb-swing-0.9.jar:regadb-util-0.9.jar:regadb-workflow-0.9.jar net.sf.regadb.io.db.Omrs.AlgorithmList $username $password $patientid $log_file $list_file >> $monitor_file
+
+$JAVA_HOME/bin/java -cp regadb-analyses-0.9.jar:regadb-analyses-ioAssist-0.9.jar:regadb-install-0.9.jar:regadb-install-regadb-init-0.9.jar:regadb-io-0.9.jar:regadb-io-db-0.9.jar:regadb-persist-0.9.jar:regadb-swing-0.9.jar:regadb-util-0.9.jar:regadb-workflow-0.9.jar net.sf.regadb.io.db.Omrs.AlgorithmList $username $password $patientid $log_file $list_file 2>> $monitor_file
+
+
+echo "Generated" >> $monitor_file
+
+rm "$running_file"
+
+echo "ENDED_SUCCES" > "$1/.ended"

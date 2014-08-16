@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<service>
+
+	<description>Get available algorithms</description>
+
+	<version>
+
+	1.0
+
+	</version>
+
+<inputs>
+	<input>
+
+                <name>
+
+                configfile
+
+                </name>
+
+                <description>
+
+                A file containing all the parameters for generating the list.
+
+                </description>
+
+        </input>
+	
+</inputs>
+
+<outputs>
+
+	<output>
+
+		<name>
+
+	        logfile	
+
+		</name>
+
+		<description>A file containing error sequence if any</description>
+
+	</output>
+	<output>
+
+		<name>
+
+	        listfile	
+
+		</name>
+
+		<description>The list file generated</description>
+
+	</output>
+
+</outputs>
+</service>
