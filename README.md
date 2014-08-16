@@ -139,9 +139,9 @@ It gives an error after loading the omod file,Go to 'Advanced Settings' in the a
 
  Fill the global properties for regadb  
 
- regadb password- regadb_password
+ regadb password- admin
 
- regadb Username- regadb_user
+ regadb Username- admin
 
  regadb remoteinstanceAddress- localhost
  
